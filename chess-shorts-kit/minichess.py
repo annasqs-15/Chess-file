@@ -22,8 +22,23 @@ def inb(f, r):
 
 
 class Board:
-    def __init__(self):
+    def __init__(self, fen=None):
         self.b = {}
+        if fen:
+            parts = fen.split()
+            for ri, row in enumerate(parts[0].split("/")):
+                f = 0
+                for ch in row:
+                    if ch.isdigit():
+                        f += int(ch)
+                    else:
+                        self.b[(f, 7 - ri)] = ("w" if ch.isupper() else "b", ch.upper())
+                        f += 1
+            self.turn = parts[1] if len(parts) > 1 else "w"
+            cs = parts[2] if len(parts) > 2 else "-"
+            self.castle = {"wK": "K" in cs, "wQ": "Q" in cs, "bK": "k" in cs, "bQ": "q" in cs}
+            self.ep = None
+            return
         back = "RNBQKBNR"
         for i, p in enumerate(back):
             self.b[(i, 0)] = ("w", p)

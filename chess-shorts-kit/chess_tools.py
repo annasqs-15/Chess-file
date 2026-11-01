@@ -36,8 +36,8 @@ def mate_in(b, attacker, n):
             if best <= 2: break
     return best
 
-def classify(pgn_text, first_ply, last_ply, max_mate=5):
-    san = parse_moves(pgn_text); b = Board(); rows = []
+def classify(pgn_text, first_ply, last_ply, max_mate=5, fen=None):
+    san = parse_moves(pgn_text); b = Board(fen); rows = []
     for i, s in enumerate(san, 1):
         before = b.copy(); mv = b.san_move(s); info = b.apply(mv)
         if i < first_ply: continue
