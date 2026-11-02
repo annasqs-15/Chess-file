@@ -1,2 +1,0 @@
-# Chess-file
-Chess assets

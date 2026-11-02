@@ -26,3 +26,9 @@ Per-PGN procedure: 1 audio_grid -> pick hit times; 2 chess_tools -> labels; 3 de
 - mix_tar.py derives SFX kinds from the SAN (x, +, #). Music file (song_t.wav) is not included; convert your mp3 to 48 kHz wav first.
 - audio_grid.py can crash on very short tracks (empty comb fit); use manual STFT-flux + autocorrelation then.
 - Remember: new video needs >=3 new ideas, appended to idea_log.md.
+
+## Rules added 2026-11-01 (see the skill chess-shorts-epic-edit for details)
+- Pieces always follow the board's perspective: flat board = flat icons; tilted board = REAL 3D pieces (lathe meshes from the PNG silhouettes, knight = inflated silhouette). renderer_tar.py still has the older billboard path (5 stacked layers); it is only a fallback. The real-3D path is built on the first video that tilts the board, then saved here.
+- Tilted pitch may go to 50-75 deg with real 3D; yaw/orbit is allowed whenever the board is tilted.
+- MANDATORY: no 3D (tilt, standing 3D pieces, orbit) on the last move, the king's fall and the rewind/loop. NOTE: renderer_tar.py / renderer_tal.py tilt the board on the mate (KEYS), which breaks this rule; for new videos move the tilt to earlier moments and return pitch to 0 before the last move.
+- MANDATORY: every video has board effects (cracks with lava, squares rising/sinking, ripples, ice, holes, ...): a few seconds each, several allowed, all different, never the whole video. Log them in idea_log.md.

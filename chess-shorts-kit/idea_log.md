@@ -39,3 +39,7 @@ Format: video | ply | idea. At the start of every new video read this file; the 
 - sacrificed piece walks to its execution under a slow spotlight while the music holds its breath
 - blundering piece gets hairline cracks on its square and the board colour drains
 - audio ducks to near silence for one beat before the mate, then the hit
+
+## Board effects log (rule since 2026-11-01; none used yet in earlier videos except hole at tal 36)
+- tal | 36 | rook dragged down into a hole in the board
+(add new board effects here: video | ply | description)

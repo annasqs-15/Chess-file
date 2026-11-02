@@ -1,0 +1,35 @@
+import re
+L = open("renderer_tar.py").read().split("\n")
+def grab(a, b=None, start=0):
+    """lines from the first line starting with `a` up to (excluding) the first line after it starting with `b`"""
+    i = next(k for k in range(start, len(L)) if L[k].startswith(a))
+    j = next((k for k in range(i + 1, len(L)) if L[k].startswith(b)), len(L)) if b else len(L)
+    return "\n".join(L[i:j]) + "\n\n"
+P = lambda n: open("parts_h/" + n).read() + "\n\n"
+out = []
+out.append(P("p_head.py"))
+out.append(grab("def clamp", "# ----------------------------------------------------------------- game"))
+out.append(P("p_game.py"))
+out.append(grab("# ----------------------------------------------------------------- assets", "CUR_PHI"))
+out.append(P("p_mesh.py"))
+out.append(P("p_time.py"))
+out.append(grab("def build_warp", "# ----------------------------------------------------------------- camera"))
+out.append(P("p_keys.py"))
+out.append(grab("def cam_base", "KICKS"))
+out.append(grab("def camera", "def homography").replace("d = u - T[41]", "d = u - T[27]"))
+out.append(grab("def homography", "# ---------------------------------------------------------------"))
+out.append(P("p_move.py"))
+out.append(grab("def arrow_poly", "BADGE"))
+out.append("BADGE = {25: (\"!!\", (70, 150, 120)), 27: (\"#\", (170, 14, 24))}\n\n")
+out.append(grab("_badge_cache", "def beam").replace("if p == 41:", "if p == 27:").replace("(29, 37, 41)", "(25, 27)"))
+out.append(grab("def beam", "_QINFO"))
+out.append(P("p_deco.py"))
+out.append(P("p_fx.py"))
+out.append(P("p_light.py"))
+out.append(grab("def apply_light", "GRADE"))
+out.append(P("p_grade.py"))
+out.append(grab("def grade", "def post_fx"))
+out.append(P("p_post.py"))
+out.append(P("p_scene.py"))
+out.append(grab("NFRAMES").replace("(29, 37, 41)", "(22, 25, 27)"))
+open("renderer_hor.py", "w").write("".join(out))
